@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+    branches:
+      - develop
+    tags:        
+      - v*
+jobs:
+  test:
+    name: Execute Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+    - run: npm install
+    - run: npm install -g typescript
+    - run: npx tsc
+    - run: npm test
